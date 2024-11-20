@@ -3,15 +3,12 @@
 use std::env;
 use std::path::PathBuf;
 
-use deno_runtime::*;
-
 mod ts {
     use std::env;
 
     use deno_core::error::custom_error;
     use deno_core::error::AnyError;
     use deno_core::op2;
-    use deno_core::snapshot::*;
     use deno_core::OpState;
     use serde::Serialize;
     use std::collections::HashMap;
@@ -270,8 +267,8 @@ mod ts {
         )
         .unwrap();
 
-        let output = create_snapshot(
-            CreateSnapshotOptions {
+        let output = deno_core::snapshot::create_snapshot(
+            deno_core::snapshot::CreateSnapshotOptions {
                 cargo_manifest_dir: env!("CARGO_MANIFEST_DIR"),
                 startup_snapshot: None,
                 extensions: vec![deno_tsc::init_ops_and_esm(
@@ -303,9 +300,13 @@ mod ts {
             file.write_all(&vec).unwrap();
         }
 
+        println!("👀 here after create_compiler_snapshot 1");
+
         for path in output.files_loaded_during_snapshot {
             println!("cargo:rerun-if-changed={}", path.display());
         }
+
+        println!("👀 here after create_compiler_snapshot 2");
     }
 
     pub(crate) fn version() -> String {
@@ -331,7 +332,11 @@ fn create_cli_snapshot(snapshot_path: PathBuf) {
         target: std::env::var("TARGET").unwrap(),
     };
 
+    println!("👀 here after create_cli_snapshot 1");
+
     deno_runtime::snapshot::create_runtime_snapshot(snapshot_path, snapshot_options, vec![]);
+
+    println!("👀 here after create_cli_snapshot 2");
 }
 
 fn git_commit_hash() -> String {
@@ -362,8 +367,9 @@ fn main() {
         return;
     }
 
-    deno_napi::print_linker_flags("deno");
-    deno_napi::print_linker_flags("denort");
+    // Deactivate NAPI linker flags for now
+    // deno_runtime::deno_napi::print_linker_flags("deno");
+    // deno_runtime::deno_napi::print_linker_flags("denort");
 
     // Host snapshots won't work when cross compiling.
     let target = env::var("TARGET").unwrap();

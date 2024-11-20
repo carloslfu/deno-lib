@@ -34,7 +34,7 @@ use deno_graph::GraphKind;
 use deno_graph::Module;
 use deno_graph::ModuleGraph;
 use deno_graph::ResolutionResolved;
-use deno_resolver::npm::ResolvePkgFolderFromDenoReqError;
+use lib_deno_resolver::npm::ResolvePkgFolderFromDenoReqError;
 use deno_runtime::deno_fs;
 use deno_runtime::deno_node::NodeResolver;
 use deno_semver::npm::NpmPackageReqReference;

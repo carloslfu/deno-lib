@@ -12,7 +12,7 @@ use deno_graph::DynamicTemplatePart;
 use deno_graph::ParserModuleAnalyzer;
 use deno_graph::TypeScriptReference;
 use deno_package_json::PackageJsonDepValue;
-use deno_resolver::sloppy_imports::SloppyImportsResolutionMode;
+use lib_deno_resolver::sloppy_imports::SloppyImportsResolutionMode;
 use deno_runtime::deno_node::is_builtin_node_module;
 
 use crate::resolver::CliSloppyImportsResolver;

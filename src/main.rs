@@ -36,8 +36,8 @@ use crate::util::v8::get_v8_flags_from_env;
 use crate::util::v8::init_v8_flags;
 
 use args::TaskFlags;
-use deno_resolver::npm::ByonmResolvePkgFolderFromDenoReqError;
-use deno_resolver::npm::ResolvePkgFolderFromDenoReqError;
+use lib_deno_resolver::npm::ByonmResolvePkgFolderFromDenoReqError;
+use lib_deno_resolver::npm::ResolvePkgFolderFromDenoReqError;
 use deno_runtime::WorkerExecutionMode;
 pub use deno_runtime::UNSTABLE_GRANULAR_FLAGS;
 

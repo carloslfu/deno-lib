@@ -31,7 +31,7 @@ use deno_npm::NpmPackageCacheFolderId;
 use deno_npm::NpmPackageId;
 use deno_npm::NpmResolutionPackage;
 use deno_npm::NpmSystemInfo;
-use deno_resolver::npm::normalize_pkg_name_for_node_modules_deno_folder;
+use lib_deno_resolver::npm::normalize_pkg_name_for_node_modules_deno_folder;
 use deno_runtime::deno_fs;
 use deno_runtime::deno_node::NodePermissions;
 use deno_semver::package::PackageNv;

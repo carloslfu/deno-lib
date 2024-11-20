@@ -18,7 +18,7 @@ use deno_graph::source::UnknownBuiltInNodeModuleError;
 use deno_graph::NpmLoadError;
 use deno_graph::NpmResolvePkgReqsResult;
 use deno_npm::resolution::NpmResolutionError;
-use deno_resolver::sloppy_imports::SloppyImportsResolver;
+use lib_deno_resolver::sloppy_imports::SloppyImportsResolver;
 use deno_runtime::colors;
 use deno_runtime::deno_fs;
 use deno_runtime::deno_fs::FileSystem;
@@ -40,19 +40,19 @@ use crate::npm::InnerCliNpmResolverRef;
 use crate::util::sync::AtomicFlag;
 use crate::util::text_encoding::from_utf8_lossy_owned;
 
-pub type CjsTracker = deno_resolver::cjs::CjsTracker<DenoFsNodeResolverEnv>;
+pub type CjsTracker = lib_deno_resolver::cjs::CjsTracker<DenoFsNodeResolverEnv>;
 pub type IsCjsResolver =
-  deno_resolver::cjs::IsCjsResolver<DenoFsNodeResolverEnv>;
-pub type IsCjsResolverOptions = deno_resolver::cjs::IsCjsResolverOptions;
+  lib_deno_resolver::cjs::IsCjsResolver<DenoFsNodeResolverEnv>;
+pub type IsCjsResolverOptions = lib_deno_resolver::cjs::IsCjsResolverOptions;
 pub type CliSloppyImportsResolver =
   SloppyImportsResolver<SloppyImportsCachedFs>;
-pub type CliDenoResolver = deno_resolver::DenoResolver<
+pub type CliDenoResolver = lib_deno_resolver::DenoResolver<
   CliDenoResolverFs,
   DenoFsNodeResolverEnv,
   SloppyImportsCachedFs,
 >;
 pub type CliNpmReqResolver =
-  deno_resolver::npm::NpmReqResolver<CliDenoResolverFs, DenoFsNodeResolverEnv>;
+  lib_deno_resolver::npm::NpmReqResolver<CliDenoResolverFs, DenoFsNodeResolverEnv>;
 
 pub struct ModuleCodeStringSource {
   pub code: ModuleSourceCode,
@@ -63,7 +63,7 @@ pub struct ModuleCodeStringSource {
 #[derive(Debug, Clone)]
 pub struct CliDenoResolverFs(pub Arc<dyn FileSystem>);
 
-impl deno_resolver::fs::DenoResolverFs for CliDenoResolverFs {
+impl lib_deno_resolver::fs::DenoResolverFs for CliDenoResolverFs {
   fn read_to_string_lossy(&self, path: &Path) -> std::io::Result<String> {
     self
       .0
@@ -86,14 +86,14 @@ impl deno_resolver::fs::DenoResolverFs for CliDenoResolverFs {
   fn read_dir_sync(
     &self,
     dir_path: &Path,
-  ) -> std::io::Result<Vec<deno_resolver::fs::DirEntry>> {
+  ) -> std::io::Result<Vec<lib_deno_resolver::fs::DirEntry>> {
     self
       .0
       .read_dir_sync(dir_path)
       .map(|entries| {
         entries
           .into_iter()
-          .map(|e| deno_resolver::fs::DirEntry {
+          .map(|e| lib_deno_resolver::fs::DirEntry {
             name: e.name,
             is_file: e.is_file,
             is_directory: e.is_directory,
@@ -207,7 +207,7 @@ impl NpmModuleLoader {
 }
 
 pub struct CliResolverOptions {
-  pub deno_resolver: Arc<CliDenoResolver>,
+  pub lib_deno_resolver: Arc<CliDenoResolver>,
   pub npm_resolver: Option<Arc<dyn CliNpmResolver>>,
   pub bare_node_builtins_enabled: bool,
 }
@@ -216,7 +216,7 @@ pub struct CliResolverOptions {
 /// import map, JSX settings.
 #[derive(Debug)]
 pub struct CliResolver {
-  deno_resolver: Arc<CliDenoResolver>,
+  lib_deno_resolver: Arc<CliDenoResolver>,
   npm_resolver: Option<Arc<dyn CliNpmResolver>>,
   found_package_json_dep_flag: AtomicFlag,
   bare_node_builtins_enabled: bool,
@@ -226,7 +226,7 @@ pub struct CliResolver {
 impl CliResolver {
   pub fn new(options: CliResolverOptions) -> Self {
     Self {
-      deno_resolver: options.deno_resolver,
+      lib_deno_resolver: options.lib_deno_resolver,
       npm_resolver: options.npm_resolver,
       found_package_json_dep_flag: Default::default(),
       bare_node_builtins_enabled: options.bare_node_builtins_enabled,
@@ -259,7 +259,7 @@ impl CliResolver {
     }
 
     let resolution = self
-      .deno_resolver
+      .lib_deno_resolver
       .resolve(
         raw_specifier,
         &referrer_range.specifier,
@@ -267,7 +267,7 @@ impl CliResolver {
         to_node_mode(mode),
       )
       .map_err(|err| match err.into_kind() {
-        deno_resolver::DenoResolveErrorKind::MappedResolution(
+        lib_deno_resolver::DenoResolveErrorKind::MappedResolution(
           mapped_resolution_error,
         ) => match mapped_resolution_error {
           MappedResolutionError::Specifier(e) => ResolveError::Specifier(e),
@@ -434,7 +434,7 @@ pub struct SloppyImportsCachedFs {
   cache: Option<
     DashMap<
       PathBuf,
-      Option<deno_resolver::sloppy_imports::SloppyImportsFsEntry>,
+      Option<lib_deno_resolver::sloppy_imports::SloppyImportsFsEntry>,
     >,
   >,
 }
@@ -452,13 +452,13 @@ impl SloppyImportsCachedFs {
   }
 }
 
-impl deno_resolver::sloppy_imports::SloppyImportResolverFs
+impl lib_deno_resolver::sloppy_imports::SloppyImportResolverFs
   for SloppyImportsCachedFs
 {
   fn stat_sync(
     &self,
     path: &Path,
-  ) -> Option<deno_resolver::sloppy_imports::SloppyImportsFsEntry> {
+  ) -> Option<lib_deno_resolver::sloppy_imports::SloppyImportsFsEntry> {
     if let Some(cache) = &self.cache {
       if let Some(entry) = cache.get(path) {
         return *entry;
@@ -467,9 +467,9 @@ impl deno_resolver::sloppy_imports::SloppyImportResolverFs
 
     let entry = self.fs.stat_sync(path).ok().and_then(|stat| {
       if stat.is_file {
-        Some(deno_resolver::sloppy_imports::SloppyImportsFsEntry::File)
+        Some(lib_deno_resolver::sloppy_imports::SloppyImportsFsEntry::File)
       } else if stat.is_directory {
-        Some(deno_resolver::sloppy_imports::SloppyImportsFsEntry::Dir)
+        Some(lib_deno_resolver::sloppy_imports::SloppyImportsFsEntry::Dir)
       } else {
         None
       }

@@ -16,8 +16,8 @@ use deno_lint::diagnostic::LintDiagnosticRange;
 use deno_lint::diagnostic::LintFix;
 use deno_lint::diagnostic::LintFixChange;
 use deno_lint::rules::LintRule;
-use deno_resolver::sloppy_imports::SloppyImportsResolution;
-use deno_resolver::sloppy_imports::SloppyImportsResolutionMode;
+use lib_deno_resolver::sloppy_imports::SloppyImportsResolution;
+use lib_deno_resolver::sloppy_imports::SloppyImportsResolutionMode;
 use text_lines::LineAndColumnIndex;
 
 use crate::graph_util::CliJsrUrlProvider;

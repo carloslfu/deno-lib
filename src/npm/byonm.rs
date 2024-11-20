@@ -6,9 +6,9 @@ use std::sync::Arc;
 
 use deno_core::error::AnyError;
 use deno_core::serde_json;
-use deno_resolver::npm::ByonmNpmResolver;
-use deno_resolver::npm::ByonmNpmResolverCreateOptions;
-use deno_resolver::npm::CliNpmReqResolver;
+use lib_deno_resolver::npm::ByonmNpmResolver;
+use lib_deno_resolver::npm::ByonmNpmResolverCreateOptions;
+use lib_deno_resolver::npm::CliNpmReqResolver;
 use deno_runtime::deno_node::DenoFsNodeResolverEnv;
 use deno_runtime::deno_node::NodePermissions;
 use deno_runtime::ops::process::NpmProcessStateProvider;

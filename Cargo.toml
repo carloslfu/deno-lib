@@ -24,7 +24,7 @@ __vendored_zlib_ng = ["flate2/zlib-ng-compat", "libz-sys/zlib-ng"]
 
 [build-dependencies]
 deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting", "only_snapshotted_js_sources"] }
-deno_core = { version = "0.319.0", features = ["include_js_files_for_snapshotting"] }
+deno_core = { version = "0.318.0", features = ["include_js_files_for_snapshotting"] }
 lazy-regex = "3"
 serde = { version = "1.0.149", features = ["derive"] }
 serde_json = "1.0.85"
@@ -60,14 +60,13 @@ deno_lockfile = "=0.23.1"
 deno_npm = "=0.25.4"
 deno_package_json = { version = "0.1.2" }
 deno_path_util = "=0.2.1"
-deno_resolver = { version = "0.9.0" }
-deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting", "only_snapshotted_js_sources"] }
+lib_deno_resolver = { version = "0.11.0" }
+lib_node_resolver = { version = "0.17.4" }
+deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting"] }
 deno_semver = "=0.5.16"
 deno_task_shell = "=0.18.1"
 deno_terminal = "0.2.0"
 libsui = "0.5.0"
-node_resolver = { version = "0.16.0" }
-
 
 anstream = "0.6.14"
 async-trait = "0.1.73"
@@ -161,9 +160,99 @@ nix = "=0.27.1"
 deno_bench_util = { version = "0.171.0" }
 pretty_assertions = "=1.4.0"
 
-[package.metadata.winres]
-# This section defines the metadata that appears in the deno.exe PE header.
-OriginalFilename = "deno.exe"
-LegalCopyright = "© Deno contributors & Deno Land Inc. MIT licensed."
-ProductName = "Deno"
-FileDescription = "Deno: A secure runtime for JavaScript and TypeScript"
+[profile.release]
+codegen-units = 1
+incremental = true
+lto = true
+opt-level = 'z' # Optimize for size
+
+# Build release with debug symbols: cargo build --profile=release-with-debug
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+
+# Faster to compile than `release` but with similar performance.
+[profile.release-lite]
+inherits = "release"
+codegen-units = 128
+lto = "thin"
+
+# Key generation is too slow on `debug`
+[profile.dev.package.num-bigint-dig]
+opt-level = 3
+
+# rusty-v8 needs at least -O1 to not miscompile
+[profile.dev.package.v8]
+opt-level = 1
+
+[profile.release.package.async-compression]
+opt-level = 3
+[profile.release.package.base64-simd]
+opt-level = 3
+[profile.release.package.brotli]
+opt-level = 3
+[profile.release.package.brotli-decompressor]
+opt-level = 3
+[profile.release.package.bytes]
+opt-level = 3
+[profile.release.package.deno_bench_util]
+opt-level = 3
+[profile.release.package.deno_broadcast_channel]
+opt-level = 3
+[profile.release.package.deno_core]
+opt-level = 3
+[profile.release.package.deno_crypto]
+opt-level = 3
+[profile.release.package.deno_fetch]
+opt-level = 3
+[profile.release.package.deno_ffi]
+opt-level = 3
+[profile.release.package.deno_http]
+opt-level = 3
+[profile.release.package.deno_napi]
+opt-level = 3
+[profile.release.package.deno_net]
+opt-level = 3
+[profile.release.package.deno_node]
+opt-level = 3
+[profile.release.package.deno_runtime]
+opt-level = 3
+[profile.release.package.deno_tls]
+opt-level = 3
+[profile.release.package.deno_url]
+opt-level = 3
+[profile.release.package.deno_web]
+opt-level = 3
+[profile.release.package.deno_websocket]
+opt-level = 3
+[profile.release.package.fastwebsockets]
+opt-level = 3
+[profile.release.package.flate2]
+opt-level = 3
+[profile.release.package.futures-util]
+opt-level = 3
+[profile.release.package.hyper]
+opt-level = 3
+[profile.release.package.miniz_oxide]
+opt-level = 3
+[profile.release.package.num-bigint-dig]
+opt-level = 3
+[profile.release.package.rand]
+opt-level = 3
+[profile.release.package.serde]
+opt-level = 3
+[profile.release.package.serde_v8]
+opt-level = 3
+[profile.release.package.libsui]
+opt-level = 3
+[profile.release.package.tokio]
+opt-level = 3
+[profile.release.package.url]
+opt-level = 3
+[profile.release.package.v8]
+opt-level = 3
+[profile.release.package.zstd]
+opt-level = 3
+[profile.release.package.zstd-sys]
+opt-level = 3
+
