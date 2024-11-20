@@ -52,24 +52,24 @@ deno_resolver = { version = "0.9.0" }
 deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting"] }
 deno_semver = "=0.5.16"
 deno_task_shell = "=0.18.1"
-deno_terminal.workspace = true
+deno_terminal = "0.2.0"
 libsui = "0.5.0"
-node_resolver.workspace = true
+node_resolver = "0.16.0"
 
 anstream = "0.6.14"
-async-trait.workspace = true
-base64.workspace = true
+async-trait = "0.1.73"
+base64 = "0.21.7"
 bincode = "=1.3.3"
-bytes.workspace = true
-cache_control.workspace = true
-chrono = { workspace = true, features = ["now"] }
+bytes = "1.4.0"
+cache_control = "=0.2.0"
+chrono = { version = "0.4", features = ["now"] }
 clap = { version = "=4.5.16", features = ["env", "string", "wrap_help", "error-context"] }
 clap_complete = "=4.5.24"
 clap_complete_fig = "=4.5.2"
-color-print.workspace = true
-console_static_text.workspace = true
-dashmap.workspace = true
-data-encoding.workspace = true
+color-print = "0.3.5"
+console_static_text = "=0.8.1"
+dashmap = "5.5.3"
+data-encoding = "2.3.3"
 dhat = { version = "0.3.3", optional = true }
 dissimilar = "=1.0.4"
 dotenvy = "0.15.7"
@@ -79,77 +79,76 @@ dprint-plugin-markdown = "=0.17.8"
 dprint-plugin-typescript = "=0.93.2"
 env_logger = "=0.10.0"
 fancy-regex = "=0.10.0"
-faster-hex.workspace = true
+faster-hex = "0.9"
 # If you disable the default __vendored_zlib_ng feature above, you _must_ be able to link against `-lz`.
-flate2.workspace = true
-fs3.workspace = true
+flate2 = "1.0.30"
+fs3 = "0.5.0"
 glob = "0.3.1"
-http.workspace = true
-http-body.workspace = true
-http-body-util.workspace = true
-hyper-util.workspace = true
+http = "1.0"
+http-body = "1.0"
+http-body-util = "0.1.2"
+hyper-util = "=0.1.7"
 import_map = { version = "=0.20.1", features = ["ext"] }
-indexmap.workspace = true
-jsonc-parser = { workspace = true, features = ["cst", "serde"] }
+indexmap = "2"
+jsonc-parser = { version = "=0.26.2", features = ["cst", "serde"] }
 jupyter_runtime = { package = "runtimelib", version = "=0.19.0", features = ["tokio-runtime"] }
-lazy-regex.workspace = true
-libc.workspace = true
-libz-sys.workspace = true
-log = { workspace = true, features = ["serde"] }
-lsp-types.workspace = true
+lazy-regex = "3"
+libc = "0.2.126"
+libz-sys = "1.1.20"
+log = { version = "0.4.20", features = ["serde"] }
+lsp-types = "=0.97.0"
 malva = "=0.11.0"
 markup_fmt = "=0.15.0"
-memmem.workspace = true
-monch.workspace = true
-notify.workspace = true
-once_cell.workspace = true
+memmem = "0.1.1"
+monch = "=0.5.0"
+notify = "=6.1.1"
+once_cell = "1.17.1"
 open = "5.0.1"
-p256.workspace = true
+p256 = "0.13.2"
 pathdiff = "0.2.1"
-percent-encoding.workspace = true
-phf.workspace = true
+percent-encoding = "2.3.0"
+phf = "0.11"
 pretty_yaml = "=0.5.0"
 quick-junit = "^0.3.5"
-rand = { workspace = true, features = ["small_rng"] }
-regex.workspace = true
-ring.workspace = true
-rustyline.workspace = true
+rand = "=0.8.5"
+regex = "^1.7.0"
+ring = "^0.17.0"
+rustyline = "=13.0.0"
 rustyline-derive = "=0.7.0"
-serde.workspace = true
-serde_repr.workspace = true
-sha2.workspace = true
+serde = "1.0.149"
+serde_repr = "=0.1.16"
+sha2 = "0.10.8"
 shell-escape = "=0.1.5"
 spki = { version = "0.7", features = ["pem"] }
 strsim = "0.11.1"
-tar.workspace = true
-tempfile.workspace = true
+tar = "=0.4.40"
+tempfile = "3.4.0"
 text-size = "=1.1.0"
 text_lines = "=0.6.0"
-thiserror.workspace = true
-tokio.workspace = true
-tokio-util.workspace = true
-tower-lsp.workspace = true
+thiserror = "1.0.61"
+tokio = "1.36.0"
+tokio-util = "0.7.4"
+tower-lsp = "0.1.0"
 tracing = { version = "0.1", features = ["log", "default"] }
-twox-hash.workspace = true
+twox-hash = "=1.6.3"
 typed-arena = "=2.0.2"
-uuid = { workspace = true, features = ["serde"] }
+uuid = { version = "1.3.0", features = ["serde"] }
 walkdir = "=2.3.2"
-which.workspace = true
-zeromq.workspace = true
+which = "4.2.5"
+zeromq = "=0.4.1"
 zip = { version = "2.1.6", default-features = false, features = ["deflate-flate2"] }
-zstd.workspace = true
+zstd = "=0.12.4"
 
 [target.'cfg(windows)'.dependencies]
-junction.workspace = true
-winapi = { workspace = true, features = ["knownfolders", "mswsock", "objbase", "shlobj", "tlhelp32", "winbase", "winerror", "winsock2"] }
+junction = "=0.2.0"
+winapi = { version = "=0.3.9", features = ["knownfolders", "mswsock", "objbase", "shlobj", "tlhelp32", "winbase", "winerror", "winsock2"] }
 
 [target.'cfg(unix)'.dependencies]
-nix.workspace = true
+nix = "=0.27.1"
 
 [dev-dependencies]
-deno_bench_util.workspace = true
-pretty_assertions.workspace = true
-test_util.workspace = true
+deno_bench_util = "0.171.0"
+pretty_assertions = "=1.4.0"
 
 [package.metadata.winres]
 # This section defines the metadata that appears in the deno.exe PE header.
