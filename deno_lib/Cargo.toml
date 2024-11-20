@@ -2,7 +2,7 @@
 
 [package]
 name = "deno_lib"
-version = "2.0.8"
+version = "2.0.9"
 authors.workspace = true
 # default-run = "deno"
 edition.workspace = true
@@ -11,6 +11,10 @@ license.workspace = true
 repository.workspace = true
 description = "Provides the deno library"
 readme = "../README.md"
+
+[lib]
+name = "deno_lib"
+path = "lib.rs"
 
 # [[bin]]
 # name = "deno"
