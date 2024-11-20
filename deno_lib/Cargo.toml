@@ -188,7 +188,7 @@ pretty_assertions.workspace = true
 
 [package.metadata.winres]
 # This section defines the metadata that appears in the deno.exe PE header.
-OriginalFilename = "deno.exe"
-LegalCopyright = "© Deno contributors & Deno Land Inc. MIT licensed."
-ProductName = "Deno"
-FileDescription = "Deno: A secure runtime for JavaScript and TypeScript"
+# OriginalFilename = "deno.exe"
+# LegalCopyright = "© Deno contributors & Deno Land Inc. MIT licensed."
+# ProductName = "Deno"
+# FileDescription = "Deno: A secure runtime for JavaScript and TypeScript"
