@@ -2,7 +2,7 @@
 
 [package]
 name = "deno_lib"
-version = "2.0.6"
+version = "2.0.7"
 authors.workspace = true
 # default-run = "deno"
 edition.workspace = true
@@ -180,7 +180,6 @@ nix.workspace = true
 [dev-dependencies]
 deno_bench_util.workspace = true
 pretty_assertions.workspace = true
-test_util.workspace = true
 
 [package.metadata.winres]
 # This section defines the metadata that appears in the deno.exe PE header.

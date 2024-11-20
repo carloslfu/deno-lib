@@ -26,4 +26,3 @@ thiserror.workspace = true
 url.workspace = true
 
 [dev-dependencies]
-test_util.workspace = true
