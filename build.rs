@@ -246,7 +246,7 @@ mod ts {
             "esnext.string",
         ];
 
-        let path_dts = cwd.join("src/dts");
+        let path_dts = cwd.join("src/tsc/dts");
         // ensure we invalidate the build properly.
         for name in libs.iter() {
             println!(
