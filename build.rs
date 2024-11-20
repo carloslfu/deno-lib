@@ -309,7 +309,7 @@ mod ts {
     }
 
     pub(crate) fn version() -> String {
-        let file_text = std::fs::read_to_string("src/00_typescript.js").unwrap();
+        let file_text = std::fs::read_to_string("src/tsc/00_typescript.js").unwrap();
         let version_text = " version = \"";
         for line in file_text.lines() {
             if let Some(index) = line.find(version_text) {
