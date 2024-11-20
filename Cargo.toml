@@ -32,6 +32,18 @@ zstd = "=0.12.4"
 glibc_version = "0.1.2"
 flate2 = { version = "1.0.30", features = ["default"] }
 
+deno_cache = { version = "0.109.0" }
+deno_console = { version = "0.177.0" }
+deno_url = { version = "0.177.0" }
+deno_web = { version = "0.208.0" }
+deno_fetch = { version = "0.201.0" }
+deno_websocket = { version = "0.182.0" }
+deno_webstorage = { version = "0.172.0" }
+deno_canvas = { version = "0.46.0" }
+deno_crypto = { version = "0.191.0" }
+deno_broadcast_channel = { version = "0.171.0" }
+deno_net = { version = "0.169.0" }
+
 [target.'cfg(windows)'.build-dependencies]
 winapi = "=0.3.9"
 winres = "=0.1.12"
@@ -39,7 +51,7 @@ winres = "=0.1.12"
 [dependencies]
 deno_ast = { version = "=0.43.3", features = ["bundler", "cjs", "codegen", "proposal", "react", "sourcemap", "transforms", "typescript", "view", "visit"] }
 deno_cache_dir = "=0.13.2"
-deno_config = { version = "=0.39.1" }
+deno_config = { version = "=0.39.1", features = ["workspace", "sync"] }
 deno_core = { version = "0.319.0", features = ["include_js_files_for_snapshotting"] }
 deno_doc = { version = "0.156.0", default-features = false, features = ["rust", "html", "syntect"] }
 deno_graph = { version = "=0.84.1" }
@@ -49,12 +61,13 @@ deno_npm = "=0.25.4"
 deno_package_json = { version = "0.1.2" }
 deno_path_util = "=0.2.1"
 deno_resolver = { version = "0.9.0" }
-deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting"] }
+deno_runtime = { version = "0.186.0", features = ["include_js_files_for_snapshotting", "only_snapshotted_js_sources"] }
 deno_semver = "=0.5.16"
 deno_task_shell = "=0.18.1"
 deno_terminal = "0.2.0"
 libsui = "0.5.0"
-node_resolver = "0.16.0"
+node_resolver = { version = "0.16.0" }
+
 
 anstream = "0.6.14"
 async-trait = "0.1.73"
@@ -62,7 +75,7 @@ base64 = "0.21.7"
 bincode = "=1.3.3"
 bytes = "1.4.0"
 cache_control = "=0.2.0"
-chrono = { version = "0.4", features = ["now"] }
+chrono = { version = "0.4", features = ["now", "std", "serde"] }
 clap = { version = "=4.5.16", features = ["env", "string", "wrap_help", "error-context"] }
 clap_complete = "=4.5.24"
 clap_complete_fig = "=4.5.2"
@@ -80,22 +93,21 @@ dprint-plugin-typescript = "=0.93.2"
 env_logger = "=0.10.0"
 fancy-regex = "=0.10.0"
 faster-hex = "0.9"
-# If you disable the default __vendored_zlib_ng feature above, you _must_ be able to link against `-lz`.
-flate2 = "1.0.30"
+flate2 = { version = "1.0.30", default-features = false }
 fs3 = "0.5.0"
 glob = "0.3.1"
 http = "1.0"
 http-body = "1.0"
 http-body-util = "0.1.2"
-hyper-util = "=0.1.7"
+hyper-util = { version = "=0.1.7", features = ["tokio", "client", "client-legacy", "server", "server-auto"] }
 import_map = { version = "=0.20.1", features = ["ext"] }
-indexmap = "2"
+indexmap = { version = "2", features = ["serde"] }
 jsonc-parser = { version = "=0.26.2", features = ["cst", "serde"] }
 jupyter_runtime = { package = "runtimelib", version = "=0.19.0", features = ["tokio-runtime"] }
 lazy-regex = "3"
 libc = "0.2.126"
-libz-sys = "1.1.20"
-log = { version = "0.4.20", features = ["serde"] }
+libz-sys = { version = "1.1.20", default-features = false }
+log = { version = "0.4.20", features = ["serde", "kv"] }
 lsp-types = "=0.97.0"
 malva = "=0.11.0"
 markup_fmt = "=0.15.0"
@@ -104,20 +116,20 @@ monch = "=0.5.0"
 notify = "=6.1.1"
 once_cell = "1.17.1"
 open = "5.0.1"
-p256 = "0.13.2"
+p256 = { version = "0.13.2", features = ["ecdh", "jwk"] }
 pathdiff = "0.2.1"
 percent-encoding = "2.3.0"
-phf = "0.11"
+phf = { version = "0.11", features = ["macros"] }
 pretty_yaml = "=0.5.0"
 quick-junit = "^0.3.5"
-rand = "=0.8.5"
+rand = { version = "=0.8.5", features = ["small_rng"] }
 regex = "^1.7.0"
 ring = "^0.17.0"
 rustyline = "=13.0.0"
 rustyline-derive = "=0.7.0"
-serde = "1.0.149"
+serde = { version = "1.0.149", features = ["derive"] }
 serde_repr = "=0.1.16"
-sha2 = "0.10.8"
+sha2 = { version = "0.10.8", features = ["oid"] }
 shell-escape = "=0.1.5"
 spki = { version = "0.7", features = ["pem"] }
 strsim = "0.11.1"
@@ -126,17 +138,16 @@ tempfile = "3.4.0"
 text-size = "=1.1.0"
 text_lines = "=0.6.0"
 thiserror = "1.0.61"
-tokio = "1.36.0"
+tokio = { version = "1.36.0", features = ["full"] }
 tokio-util = "0.7.4"
-tower-lsp = "0.1.0"
+tower-lsp = { package = "deno_tower_lsp", version = "0.1.0", features = ["proposed"] }
 tracing = { version = "0.1", features = ["log", "default"] }
 twox-hash = "=1.6.3"
 typed-arena = "=2.0.2"
-uuid = { version = "1.3.0", features = ["serde"] }
+uuid = { version = "1.3.0", features = ["serde", "v4"] }
 walkdir = "=2.3.2"
 which = "4.2.5"
-zeromq = "=0.4.1"
-zip = { version = "2.1.6", default-features = false, features = ["deflate-flate2"] }
+zeromq = { version = "=0.4.1", default-features = false, features = ["tcp-transport", "tokio-runtime"] }
 zstd = "=0.12.4"
 
 [target.'cfg(windows)'.dependencies]
@@ -147,7 +158,7 @@ winapi = { version = "=0.3.9", features = ["knownfolders", "mswsock", "objbase",
 nix = "=0.27.1"
 
 [dev-dependencies]
-deno_bench_util = "0.171.0"
+deno_bench_util = { version = "0.171.0" }
 pretty_assertions = "=1.4.0"
 
 [package.metadata.winres]
