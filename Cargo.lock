@@ -1598,7 +1598,7 @@ dependencies = [
 
 [[package]]
 name = "deno_lib"
-version = "2.0.6"
+version = "2.0.9"
 dependencies = [
  "anstream",
  "async-trait",
@@ -1616,13 +1616,20 @@ dependencies = [
  "data-encoding",
  "deno_ast",
  "deno_bench_util",
+ "deno_broadcast_channel",
+ "deno_cache",
  "deno_cache_dir",
+ "deno_canvas",
  "deno_config",
+ "deno_console",
  "deno_core",
+ "deno_crypto",
  "deno_doc",
+ "deno_fetch",
  "deno_graph",
  "deno_lint",
  "deno_lockfile",
+ "deno_net",
  "deno_npm",
  "deno_package_json",
  "deno_path_util",
@@ -1632,6 +1639,10 @@ dependencies = [
  "deno_task_shell",
  "deno_terminal 0.2.0",
  "deno_tower_lsp",
+ "deno_url",
+ "deno_web",
+ "deno_websocket",
+ "deno_webstorage",
  "dhat",
  "dissimilar",
  "dotenvy",
@@ -8250,9 +8261,9 @@ dependencies = [
 
 [[package]]
 name = "zeromq"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb0560d00172817b7f7c2265060783519c475702ae290b154115ca75e976d4d0"
+checksum = "6a4528179201f6eecf211961a7d3276faa61554c82651ecc66387f68fc3004bd"
 dependencies = [
  "async-trait",
  "asynchronous-codec",
