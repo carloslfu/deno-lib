@@ -39,7 +39,6 @@ use deno_runtime::WorkerExecutionMode;
 pub use deno_runtime::UNSTABLE_GRANULAR_FLAGS;
 use npm::ResolvePkgFolderFromDenoReqError;
 
-use deno_core::anyhow::Context;
 use deno_core::error::AnyError;
 use deno_core::error::JsError;
 use deno_core::futures::FutureExt;
@@ -51,15 +50,11 @@ use deno_terminal::colors;
 use factory::CliFactory;
 use standalone::MODULE_NOT_FOUND;
 use standalone::UNSUPPORTED_SCHEME;
-use std::env;
 use std::future::Future;
-use std::io::IsTerminal;
 use std::ops::Deref;
-use std::path::PathBuf;
 use std::sync::Arc;
 
-use deno_runtime::deno_fs::RealFs;
-use deno_runtime::deno_permissions::PermissionsContainer;
+// pub use deno_runtime;
 
 pub fn run(cmd: &str) -> String {
     let args: Vec<_> = vec!["deno", "run", cmd]
