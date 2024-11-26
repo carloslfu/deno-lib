@@ -91,7 +91,8 @@ fast-socks5 = "0.9.6"
 faster-hex = "0.9"
 fastwebsockets = { version = "0.8", features = ["upgrade", "unstable-split"] }
 filetime = "0.2.16"
-flate2 = { version = "1.0.30", default-features = false }
+zip = { version = "=2.1.6", default-features = false, features = ["deflate-flate2"] }
+flate2 = { version = "=1.0.31", default-features = false }
 fs3 = "0.5.0"
 futures = "0.3.21"
 glob = "0.3.1"
@@ -283,8 +284,6 @@ opt-level = 3
 [profile.release.package.serde_v8]
 opt-level = 3
 [profile.release.package.libsui]
-opt-level = 3
-[profile.release.package.test_napi]
 opt-level = 3
 [profile.release.package.tokio]
 opt-level = 3

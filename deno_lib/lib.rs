@@ -54,7 +54,7 @@ use std::future::Future;
 use std::ops::Deref;
 use std::sync::Arc;
 
-// pub use deno_runtime;
+pub use deno_runtime;
 
 pub fn run(cmd: &str) -> String {
     let args: Vec<_> = vec!["deno", "run", cmd]
