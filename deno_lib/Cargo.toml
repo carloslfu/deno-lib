@@ -1,7 +1,7 @@
 # Copyright 2018-2024 the Deno authors. All rights reserved. MIT license.
 
 [package]
-name = "deno_lib"
+name = "deno_lib_extended"
 version = "2.2.0"
 authors.workspace = true
 # default-run = "deno"
@@ -13,7 +13,7 @@ description = "Provides the deno library"
 readme = "../README.md"
 
 [lib]
-name = "deno_lib"
+name = "deno_lib_extended"
 path = "lib.rs"
 
 # [[bin]]

@@ -25,7 +25,7 @@ use deno_runtime::deno_node::NodeRequireLoader;
 use deno_runtime::deno_node::NodeRequireLoaderRc;
 use deno_runtime::deno_node::NodeResolver;
 use deno_runtime::deno_node::PackageJsonResolver;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use deno_runtime::deno_tls::RootCertStoreProvider;
 use deno_runtime::deno_web::BlobStore;
 use deno_runtime::fmt_errors::format_js_error;
@@ -806,7 +806,7 @@ mod tests {
   use deno_core::resolve_path;
   use deno_core::FsModuleLoader;
   use deno_fs::RealFs;
-  use deno_runtime::deno_permissions::Permissions;
+  use deno_runtime::deno_permissions_extended::Permissions;
   use deno_runtime::permissions::RuntimePermissionDescriptorParser;
 
   fn create_test_worker() -> MainWorker {

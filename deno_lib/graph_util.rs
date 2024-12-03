@@ -44,7 +44,7 @@ use deno_path_util::url_to_file_path;
 use deno_resolver::sloppy_imports::SloppyImportsResolutionMode;
 use deno_runtime::deno_fs::FileSystem;
 use deno_runtime::deno_node;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use deno_semver::jsr::JsrDepPackageReq;
 use deno_semver::package::PackageNv;
 use import_map::ImportMapError;

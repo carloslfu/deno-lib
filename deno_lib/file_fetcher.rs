@@ -22,7 +22,7 @@ use deno_core::ModuleSpecifier;
 use deno_graph::source::LoaderChecksum;
 
 use deno_path_util::url_to_file_path;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use deno_runtime::deno_web::BlobStore;
 use http::header;
 use log::debug;
@@ -655,13 +655,13 @@ impl FileFetcher {
       FetchPermissionsOptionRef::StaticContainer(permissions) => {
         permissions.check_specifier(
           specifier,
-          deno_runtime::deno_permissions::CheckSpecifierKind::Static,
+          deno_runtime::deno_permissions_extended::CheckSpecifierKind::Static,
         )?;
       }
       FetchPermissionsOptionRef::DynamicContainer(permissions) => {
         permissions.check_specifier(
           specifier,
-          deno_runtime::deno_permissions::CheckSpecifierKind::Dynamic,
+          deno_runtime::deno_permissions_extended::CheckSpecifierKind::Dynamic,
         )?;
       }
     }

@@ -71,7 +71,7 @@ use deno_runtime::code_cache;
 use deno_runtime::deno_fs::FileSystem;
 use deno_runtime::deno_node::create_host_defined_options;
 use deno_runtime::deno_node::NodeRequireLoader;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use deno_semver::npm::NpmPackageReqReference;
 use node_resolver::InNpmPackageChecker;
 use node_resolver::NodeResolutionMode;

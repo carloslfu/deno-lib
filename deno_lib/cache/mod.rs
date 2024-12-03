@@ -21,7 +21,7 @@ use deno_graph::source::LoadFuture;
 use deno_graph::source::LoadResponse;
 use deno_graph::source::Loader;
 use deno_runtime::deno_fs;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use node_resolver::InNpmPackageChecker;
 use std::collections::HashMap;
 use std::path::Path;

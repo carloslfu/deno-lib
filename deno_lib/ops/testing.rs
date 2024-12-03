@@ -16,8 +16,8 @@ use deno_core::op2;
 use deno_core::v8;
 use deno_core::ModuleSpecifier;
 use deno_core::OpState;
-use deno_runtime::deno_permissions::ChildPermissionsArg;
-use deno_runtime::deno_permissions::PermissionsContainer;
+use deno_runtime::deno_permissions_extended::ChildPermissionsArg;
+use deno_runtime::deno_permissions_extended::PermissionsContainer;
 use std::sync::atomic::AtomicUsize;
 use std::sync::atomic::Ordering;
 use uuid::Uuid;
@@ -51,7 +51,7 @@ struct PermissionsHolder(Uuid, PermissionsContainer);
 pub fn op_pledge_test_permissions(
   state: &mut OpState,
   #[serde] args: ChildPermissionsArg,
-) -> Result<Uuid, deno_runtime::deno_permissions::ChildPermissionError> {
+) -> Result<Uuid, deno_runtime::deno_permissions_extended::ChildPermissionError> {
   let token = Uuid::new_v4();
   let parent_permissions = state.borrow_mut::<PermissionsContainer>();
   let worker_permissions = parent_permissions.create_child_permissions(args)?;
